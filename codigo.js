@@ -1,238 +1,137 @@
-let jugadorUnot1 = 0;
-let jugadorDost1 = 0;
-let jugadorUnot2 = 0;
-let jugadorDost2 = 0;
-let jugadorUnot3 = 0;
-let jugadorDost3 = 0;
-let contadorJugador1 = 0;
-let contadorJugador2 = 0;
+let turnero = "verde";
+let posiciones= 0;
+let puntosVerde = 0;
+let puntosRojo = 0;
+let turnos = 0;
+let clima = document.getElementsByClassName("clima")
 
-//Arreglos//
-let posicionesJugadorUno = [];
-let posicionesJugadorDos = [];
 
-//Funciones://
-function turnoJugador1(lista_turno){
-    tablero[lista_turno].addEventListener("click",function(){
-        tablero[lista_turno].style.backgroundColor= "#008000"
-    })
-}
-
-function turnoJugador2(lista_turno){
-    tablero[lista_turno].addEventListener("click",function(){
-        tablero[lista_turno].style.backgroundColor= "#FF0000"
-    
-    })
-}
+//funciones
 
 function sumarPuntosJugadorUno(){
     boton[0].addEventListener("click",function(){
-        contadorJugador1=contadorJugador1 + 1
-        console.log("Puntos del jugador 1: ", contadorJugador1)
-        sessionStorage.setItem("Puntos_del_jugador_1: ", contadorJugador1)
+       puntosVerde++;
     })
 }
 
 function sumarPuntosJugadorDos(){
     boton[1].addEventListener("click",function(){
-        contadorJugador2=contadorJugador2 + 1
-        console.log("Puntos del jugador 2: ", contadorJugador2)
-        sessionStorage.setItem("Puntos_del_jugador_2: ", contadorJugador2)
+        puntosRojo++;
     })
 }
 
-//Codigo://
+function turno(caja, i){
+    caja.addEventListener("click", function(){
+        const cuadrado = document.querySelectorAll(".caja__hijo")
+        
+        if(caja.style.backgroundColor != "rgb(255, 255, 255)"){
+            return;
+        }
 
-alert("Bienvenido al TA-TE-TI")
-alert("Reglas del juego:")
-alert("Imagine un tablero de 3x3 donde la primera posicion de arriba a la izquierda es la numero 0 y la ultima posicion de abajo a la derecha es la posicion 8.")
-alert("Los jugadores iran ingresando por turnos una posicion del 0 al 8 que sera guardada. El primero en colocar 3 posiciones seguidas tanto en fila, columna o diagonal gana la partida.")
-alert("Al final de la partida se le mostrará un tablero en pantalla en el cual haciendo click en las posiciones ya elegidas anteriormente podra ver de color VERDE las posiciones elegidas por el jugador uno y de color ROJO las posiciones elegidas por el jugador 2")
-let tablero = document.getElementsByClassName("caja__hijo");
-
-//Primer turno del jugador 1//
-
-do{
-    jugadorUnot1 = prompt("Jugador 1: ingrese su primera posicion:");
-    if(jugadorUnot1>-1 && jugadorUnot1<9){
-        posicionesJugadorUno.push(jugadorUnot1);
-        turnoJugador1(jugadorUnot1)
-    }
-
-    else{
-        alert("El valor ingresado no es correcto, por favor elija una posicion del 0 al 8")
-    }
+        turnero === "verde" ? caja.style.backgroundColor = "#008000": caja.style.backgroundColor= "#FF0000";
+        turnero === "verde" ? turnero = "rojo" : turnero = "verde";
+    })
 }
 
-while(jugadorUnot1<0 || jugadorUnot1>8)
+function resetearCajas(){
 
+        if(botonReset.innerText==="INICIAR"){
+        intrucciones()
+        };
 
-//Primer turno del jugador2//
-
-do{
-    jugadorDost1 = prompt("Jugador 2: ingrese su primera posicion");
-    if(jugadorDost1 != jugadorUnot1 && jugadorDost1>-1 && jugadorDost1<9){
-        posicionesJugadorDos.push(jugadorDost1);
-        turnoJugador2(jugadorDost1)
-    }
-
-    else if(jugadorDost1<0 || jugadorDost1>8){
-        alert("El valor ingresado no es correcto, por favor elija una posicion del 0 al 8")
-    }
-
-    else{
-        alert("El numero ingresado ya esta ocupado por el jugador 1. Elija otra posicion")
-    }
+        const cuadrado = document.querySelectorAll(".caja__hijo")
+        cuadrado.forEach(caja => {
+            botonReset.innerText="Reiniciar tablero"
+            caja.style.backgroundColor = "rgb(255, 255, 255)"
+            
+        });
 }
 
-while(jugadorDost1==jugadorUnot1 || jugadorDost1<0 || jugadorDost1>8);
-
-//Segundo turno del jugador 1//
-do{
-    jugadorUnot2 = prompt("Jugador 1: ingrese su segunda posicion:");
-    if(jugadorDost1 != jugadorUnot2 && jugadorUnot1 != jugadorUnot2 && jugadorUnot2>-1 && jugadorUnot2<9){
-        posicionesJugadorUno.push(jugadorUnot2);
-        turnoJugador1(jugadorUnot2)
+    function intrucciones(){
+        Swal.fire({
+            title: 'INSTRUCCIONES',
+            text: 'Empezará jugando el color verde. Una vez marque su ficha en el tablero automáticamente jugará el contrincante de color rojo y así sucesivamente. Al finalizar la partida, el ganador sumará manualmente sus puntos en ambos contadores de la derecha y reiniciará el tablero. Si antes empezó primero verde al reiniciar comenzara primero rojo y viceversa (complete el tablero para que esto ocurra). ¡A jugar! ',
+            confirmButtonText: 'Jugar'
+          })
     }
+     function bienvenido(){
+        Swal.fire({
+            title: 'BIENVENIDO A TA-TE-TI',
+            text: 'Apriete el boton "iniciar" para activar el tablero',
+            confirmButtonText: 'Jugar'
+          })
+     }
 
-    else if(jugadorUnot2==jugadorDost1){
-        alert("El numero ingresado ya esta ocupado por el jugador 2. Elija otra posicion")
-        
-    }
+     
+     /* NO ANDA
+     function localizacion(coordenadas){
+        let latitud = coordenadas.coords.latitude;
+        let longitud = coordenadas.coords.longitude;
+        let contraseña ="2bbb2f2e2db7344ec2de697297a60cc4"
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${contraseña}&units=metric&lang=es`)
+            .then(response => response.json())
+            .then(data =>{
+                document.body.innerHTML= `  <p>${data.name}</p>
+                                             <p>${data.main.temp}</p>
+                                             <p>Clima:${data.weather[0].description}</p>`
+            })
 
-    else if(jugadorUnot2<0 || jugadorUnot2>8){
-        alert("El valor ingresado no es correcto, por favor elija una posicion del 0 al 8")
-    }
+        }
 
-    else if(jugadorUnot2==jugadorUnot1){
-        alert("Ya estas ocupando esta posicion. Elija otra")
-        
-    }
+        */
 
-}
-while(jugadorDost1==jugadorUnot2 || jugadorUnot2 == jugadorUnot1 || jugadorUnot2<1 || jugadorUnot2>9);
-
-//Segundo turno del jugador 2//
-
-do{
-    jugadorDost2 = prompt("Jugador 2: ingrese su segunda posicion:");
-    if(jugadorDost2 != jugadorUnot2 && jugadorDost1 != jugadorDost2 && jugadorDost2 != jugadorUnot1 && jugadorDost2>-1 && jugadorDost2<9){
-        posicionesJugadorDos.push(jugadorDost2);
-        turnoJugador2(jugadorDost2)
-    }
-
-    else if(jugadorUnot2==jugadorDost2){
-        alert("El numero ingresado ya esta ocupado por el jugador 1. Elija otra posicion")
-        
-    }
-
-    else if(jugadorDost2<0 || jugadorDost2>8){
-        alert("El valor ingresado no es correcto, por favor elija una posicion del 0 al 8")
-    }
-
-    else if(jugadorDost1==jugadorDost2){
-        alert("Ya estas ocupando esta posicion. Elija otra")
-        
-    }
-
-    else if(jugadorDost2==jugadorUnot1){
-        alert("El numero ingresado ya esta ocupado por el jugador 1. Elija otra posicion")
-        
-    }
-}
-while(jugadorUnot2==jugadorDost2 || jugadorDost1==jugadorDost2 || jugadorDost2==jugadorUnot1 || jugadorDost2<0 || jugadorDost2>8);
-
-//Tercer turno del jugador 1//
-
-do{
-    jugadorUnot3 = prompt("Jugador 1: ingrese su tercera posicion:");
-    if(jugadorUnot3 != jugadorUnot1 && jugadorUnot3 != jugadorUnot2 && jugadorUnot3 != jugadorDost1 && jugadorUnot3 != jugadorDost2 && jugadorUnot3>-1 && jugadorUnot3<9){
-        posicionesJugadorUno.push(jugadorUnot3);
-        turnoJugador1(jugadorUnot3)
-    }
-
-    else if(jugadorUnot3==jugadorUnot1){
-        alert("Ya estas ocupando esta posicion. Elija otra")
-        
-    }
-
-    else if(jugadorUnot3==jugadorUnot2){
-        alert("Ya estas ocupando esta posicion. Elija otra")
-        
-    }
-
-    else if(jugadorUnot3<0 || jugadorUnot3>8){
-        alert("El valor ingresado no es correcto, por favor elija una posicion del 0 al 8")
-    }
-
-    else if(jugadorUnot3==jugadorDost1){
-        alert("El numero ingresado ya esta ocupado por el jugador 2. Elija otra posicion")
-        
-    }
-
-    else if(jugadorUnot3==jugadorDost2){
-        alert("El numero ingresado ya esta ocupado por el jugador 2. Elija otra posicion")
-        
-    }
-}
-while(jugadorUnot3==jugadorUnot1 || jugadorUnot3==jugadorUnot2 || jugadorUnot3==jugadorDost1 || jugadorUnot3==jugadorDost2 || jugadorUnot3<0 || jugadorUnot3>8);
+//codigo
 
 
-//Tercer turno del jugador 2//
+const cuadrado = document.querySelectorAll(".caja__hijo")
+const botonReset = document.getElementById("resetear")
+const boton = document.getElementsByClassName("marcador__item")
 
-do{
-    jugadorDost3 = prompt("Jugador 2: ingrese su tercera posicion:");
-    if(jugadorDost3 != jugadorUnot1 && jugadorDost3 != jugadorUnot2 && jugadorDost3 != jugadorUnot3 && jugadorDost3 != jugadorDost2 && jugadorDost3 != jugadorDost1 && jugadorDost3>-1 && jugadorDost3<9){
-        posicionesJugadorDos.push(jugadorDost3);
-        turnoJugador2(jugadorDost3)
-    }
+const  jugador1Btn = document.getElementById("jugador1Btn");
+const  jugador2Btn = document.getElementById("jugador2Btn");
 
-    else if(jugadorDost3==jugadorUnot1){
-        alert("El numero ingresado ya esta ocupado por el jugador 1. Elija otra posicion")
-        
-    }
+const  jugador1Btn1 = document.getElementById("jugador1Btn2");
+const  jugador2Btn2 = document.getElementById("jugador2Btn2");
 
-    else if(jugadorDost3==jugadorUnot2){
-        alert("El numero ingresado ya esta ocupado por el jugador 1. Elija otra posicion")
-        
-    }
+const  jugador1NumeroSpan = document.getElementById("jugador1Numero");
+const  jugador2NumeroSpan = document.getElementById("jugador2Numero");
 
-    else if(jugadorDost3<0 || jugadorDost3>8){
-        alert("El valor ingresado no es correcto, por favor elija una posicion del 0 al 8")
-    }
+    
+    bienvenido()
+    
+    cuadrado.forEach(turno)
+    /*navigator.geolocation.getCurrentPosition(localizacion)*//*NO ANDA*/
+    botonReset.innerText="INICIAR"
+    botonReset.addEventListener("click", resetearCajas)
+    
+    jugador1Btn.addEventListener("click", function() {
+        puntosVerde++;
+        jugador1NumeroSpan.textContent = puntosVerde;
+    });
+    
+    jugador2Btn.addEventListener("click", function() {
+        puntosRojo++;
+        jugador2NumeroSpan.textContent = puntosRojo;
+    });
 
-    else if(jugadorDost3==jugadorUnot3){
-        alert("El numero ingresado ya esta ocupado por el jugador 1. Elija otra posicion")
-        
-    }
+    jugador1Btn1.addEventListener("click", function() {
+        puntosVerde--;
+        jugador1NumeroSpan.textContent = puntosVerde;
+    });
+    
+    jugador2Btn2.addEventListener("click", function() {
+        puntosRojo--;
+        jugador2NumeroSpan.textContent = puntosRojo;
+      });
+      
 
-    else if(jugadorDost3==jugadorDost1){
-        alert("Ya estas ocupando esta posicion. Elija otra")
-        
-    }
+      
 
-    else if(jugadorDost3==jugadorDost2){
-        alert("Ya estas ocupando esta posicion. Elija otra")
-        
-    }
-}
-while(jugadorDost3==jugadorUnot1 || jugadorDost3==jugadorUnot2 || jugadorDost3==jugadorUnot3 || jugadorDost3==jugadorDost1 || jugadorDost3==jugadorDost2 || jugadorDost3<0 || jugadorDost3>8);
 
-//SUMATORIA DE PUNTOS MANUAL//
-
-let boton = document.getElementsByClassName("boton")
-
-sumarPuntosJugadorUno()
-sumarPuntosJugadorDos()
+    
 
 
 
-
-
-
-
-
-
-
+    
 
 

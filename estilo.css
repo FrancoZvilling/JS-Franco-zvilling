@@ -12,25 +12,6 @@ body{
 
 
 
-.fin_partida{
-    font-family: 'Press Start 2P', cursive;
-    font-size: 1.3em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 30em;
-    margin: 0;
-    padding: 5rem;
-    background-image: radial-gradient( #d10b85 10%, #000000 90%);
-    margin-top: 4em;
-    border-radius: 5em;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    gap: 2px;
-}
-
 /*TITULO TA TE TI*/
 h1{
     text-align: center;
@@ -42,7 +23,11 @@ h1{
     
 }
 
+.conteiner{
+    display: flex;
 
+
+}
 
 .caja{
 
@@ -73,12 +58,12 @@ h1{
 
 .marcador{
     display: flex;
-    justify-content: center;
+    height: 27.5em;
     flex-direction: column;
-    align-items: flex-start;
+    border: .3em solid rgb(224, 20, 20);
     border-radius: .3em;
     margin-left: 2em;
-    gap: 1em;
+    margin-top: 10em;
     color: rgb(0, 0, 0);
     font-family: 'Press Start 2P', cursive;
     text-align: start;
@@ -88,21 +73,40 @@ h1{
 
 .marcador__item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 0.5em;
+    border: 1px solid rgb(37, 15, 233);
 }
 
-.marcador__item span {
+.marcador__item .numero {
     margin-right: 0.5em;
 }
 
-.marcador__item .puntos {
-    background-color: rgb(23, 8, 235);
-    color: #fff;
-    padding: 0.25em 0.5em;
-    border-radius: 0.5em;
+
+#resetear{
+    display: flex;
+    align-items: column;
+    color: #000000;
+    margin-top: 2em;
+    font-family: 'Press Start 2P', cursive;
+    background-color: yellow;
 }
 
+.numero{
+    font-size: 2em;
+    margin-top: 2em;
+    padding-bottom: 2em;
+    text-align: center;
+}
 
+.boton{
+    width: 5em;
+    padding: 0em 0em;
+    color: #d10b85;
+    background-color: yellow;
+    text-align: center;
+    
+}
 
 

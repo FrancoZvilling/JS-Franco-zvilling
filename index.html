@@ -8,10 +8,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@100;300;400;500&family=Mynerve&family=Playfair+Display:wght@400;600&family=Press+Start+2P&family=Rubik:wght@300;600;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     
+    <div class="clima">
+        
+    </div>
+
     <h1>TA-TE-TI</h1>
     
     
@@ -52,26 +57,34 @@
             <div class="caja__hijo">
     
             </div>
-        </div>
 
+            <div>
+                <button id="resetear">Resetear tablero</button>
+            </div>
+        </div>
+        
         <div class="marcador">
             <div class="marcador__item">
-                <span>Jugador 1:</span>
+                <span>Jugador verde</span>
+                <span class="numero" id="jugador1Numero">0</span>
                 
-                <button class="boton">+</button>
+                <button class="boton" id="jugador1Btn">+</button>
+                <button class="boton" id="jugador1Btn2">-</button>
             </div>
             <div class="marcador__item">
-                <span>Jugador 2:</span>
+                <span>Jugador rojo</span>
+                <span class="numero" id="jugador2Numero">0</span>
                 
-                <button class="boton">+</button>
+                <button class="boton" id="jugador2Btn">+</button>
+                <button class="boton" id="jugador2Btn2">-</button>
             </div>
         </div>
     </div>
     
 
     
-
-   <script src="codigo.js"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="codigo.js"></script>
     
 </body>
 </html>
